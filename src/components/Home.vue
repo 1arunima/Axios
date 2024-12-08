@@ -3,36 +3,22 @@
 
 import {ref,watch} from 'vue'
 import axios from 'axios'
+import instance from '@/Services/AxiosInstance'
 
 
 const datas =ref('')
 const search = ref('')
 const filteredMeals = ref([]);
-// const instance = axios.create({
-//   baseURL: 'https://www.themealdb.com/api/json/v1/1/search.php?s=',
-//   timeout: 1000,
- 
-// });
-// instance.get('')
-//   .then(response => {
-//     console.log(response.data.meals);
-//     datas.value=response.data.meals
-//   })
-//   .catch(error => {
-//     console.error('Error fetching data:', error);
-//   });
 
 
+instance
+.get('search.php?s=')
+.then((response)=>{
+  datas.value=response.data.meals || []
+  filteredMeals.value =datas.value
+})
+.catch((error)=> console.error('error fetching data:' ,error))
 
-  axios
-  .get('https://www.themealdb.com/api/json/v1/1/search.php?s=')
-  .then((response) => {
-    datas.value = response.data.meals || [];
-    filteredMeals.value = datas.value; // Initially show all meals
-  })
-  .catch((error) => console.error('Error fetching data:', error));
-
-// Watch for changes in the search term and filter meals locally
 watch(search, (newValue) => {
   filteredMeals.value = datas.value.filter((meal) =>
     meal.strMeal.toLowerCase().includes(newValue.toLowerCase())
@@ -43,7 +29,7 @@ watch(search, (newValue) => {
 <template>
     
 <v-container>
-    <h1>  Enjoyyyyyy Eating</h1>
+    <h1 class="text-center mb-6 ">  Enjoy Eating</h1>
 
 <v-row justify="center" class="d-flex mb-4">
   <v-col cols="12" md="4">
