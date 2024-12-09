@@ -11,6 +11,9 @@ const search = ref('')
 const filteredMeals = ref([]);
 
 
+
+
+
 instance
 .get('search.php?s=')
 .then((response)=>{

@@ -10,7 +10,8 @@
     "lint": "eslint . --fix"
   },
   "dependencies": {
-    "@mdi/font": "7.4.47",
+    "@mdi/font": "^7.4.47",
+    "@tabler/icons-vue": "^3.24.0",
     "axios": "^1.7.9",
     "roboto-fontface": "*",
     "vue": "^3.4.31",
